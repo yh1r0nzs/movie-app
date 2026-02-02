@@ -40,7 +40,59 @@
       </section>
     </header>
     <main>
-      <section class="movies" id="movies"></section>
+      <section class="genres" id="genres">
+        <input
+          type="radio"
+          name="genres"
+          class="genresBtn"
+          id="acao"
+          value="28"
+        />
+        <label for="acao">Ação</label>
+
+        <input
+          type="radio"
+          name="genres"
+          class="genresBtn"
+          id="aventura"
+          value="12"
+        />
+        <label for="aventura">Aventura</label>
+
+        <input
+          type="radio"
+          name="genres"
+          class="genresBtn"
+          id="animacao"
+          value="16"
+        />
+        <label for="animacao">Animação</label>
+
+        <input
+          type="radio"
+          name="genres"
+          class="genresBtn"
+          id="comedia"
+          value="35"
+        />
+        <label for="comedia">Comédia</label>
+
+        <input
+          type="radio"
+          name="genres"
+          class="genresBtn"
+          id="drama"
+          value="18"
+        />
+        <label for="drama">Drama</label>
+      </section>
+      <section class="row">
+        <button class="arrow left" aria-label="Scroll para esquerda">‹</button>
+
+        <div class="movies-row" id="movies"></div>
+
+        <button class="arrow right" aria-label="Scroll para direita">›</button>
+      </section>
     </main>
     <footer>
       <p>
@@ -50,5 +102,6 @@
         </a>
       </p>
     </footer>
+    <script type="module" src="./assets/js/main.js"></script>
   </body>
 </html>
