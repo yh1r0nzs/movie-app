@@ -1,0 +1,53 @@
+:root {
+  --mainColor: #10002b;
+  --secundaryColor: #240046;
+  --black: #000;
+  --vidro: rgba(0, 0, 0, 0.308);
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  text-decoration: none;
+  border: none;
+  outline: none;
+}
+body {
+  background: linear-gradient(
+    160deg,
+    var(--secundaryColor),
+    var(--mainColor),
+    var(--black)
+  );
+  color: #fff;
+  height: 100dvh;
+  padding-top: 4rem;
+}
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 99;
+  background-color: #00000099;
+  border-bottom: var(--border);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+header section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  flex-wrap: wrap;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
