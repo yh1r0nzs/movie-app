@@ -18,9 +18,16 @@
     />
     <meta property="og:type" content="website" />
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;500;600;700;800;900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="bg-blur"></div>
+    <div id="bg"></div>
     <header class="glass">
       <section>
         <h1>MovieBase</h1>
@@ -49,10 +56,7 @@
       </section>
     </header>
     <main>
-      <section class="hero glass">
-        <h2>Descubra filmes populares</h2>
-        <p>Explore por gênero e deslize para descobrir novos títulos.</p>
-      </section>
+      <section id="hero"></section>
       <section class="genres glass" id="genres" role="radiogroup">
         <input
           type="radio"
@@ -100,11 +104,7 @@
         <label for="drama" class="glass">Drama</label>
       </section>
       <section class="row glass">
-        <button class="arrow left" aria-label="Scroll para esquerda">‹</button>
-
         <div class="movies-row" id="movies"></div>
-
-        <button class="arrow right" aria-label="Scroll para direita">›</button>
       </section>
     </main>
     <footer>

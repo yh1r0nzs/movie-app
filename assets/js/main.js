@@ -1,13 +1,12 @@
-import { moviePopularity, genres, searchMovies } from "./api.js";
-import {
-  renderGenres,
-  renderMoviesPopular,
-  renderSearchResults,
-} from "./ui.js";
-import { scroll } from "./scroll.js";
+import { getPopularMovies, getMoviesByGenre, searchMovies } from "./api/api.js";
 
+import { renderHero } from "./ui/hero.js";
+import { renderMovies } from "./ui/movies.js";
+import { splitFeaturedMovie } from "./states/moviesState.js";
+
+const heroContainer = document.querySelector("#hero");
 const moviesContainer = document.querySelector("#movies");
-const inputs = document.querySelectorAll(".genresBtn");
+const genreInputs = document.querySelectorAll(".genresBtn");
 const openSearchBtn = document.querySelector(".btn-search");
 const modal = document.getElementById("searchModal");
 const closeBtn = document.querySelector(".close-search");
@@ -22,34 +21,22 @@ closeBtn.addEventListener("click", () => {
   modal.classList.remove("active");
 });
 
-let timeout;
+async function loadHome() {
+  const movies = await getPopularMovies();
+  const { featured, list } = splitFeaturedMovie(movies);
 
-input.addEventListener("input", () => {
-  clearTimeout(timeout);
-
-  timeout = setTimeout(async () => {
-    if (input.value.length < 2) {
-      results.innerHTML = "";
-      return;
-    }
-
-    const movies = await searchMovies(input.value);
-    renderSearchResults(movies, results);
-  }, 400);
-});
-
-async function init() {
-  const movies = await moviePopularity();
-  renderMoviesPopular(movies, moviesContainer);
+  renderHero(featured, heroContainer);
+  renderMovies(list, moviesContainer);
 }
-inputs.forEach((input) => {
+
+genreInputs.forEach((input) => {
   input.addEventListener("change", async () => {
-    const movies = await genres(input.value);
-    renderMoviesPopular(movies, moviesContainer);
+    const movies = await getMoviesByGenre(input.value);
+    const { featured, list } = splitFeaturedMovie(movies);
+
+    renderHero(featured, heroContainer);
+    renderMovies(list, moviesContainer);
   });
 });
 
-init();
-setTimeout(() => {
-  scroll();
-}, 0);
+loadHome();
