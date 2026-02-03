@@ -1,133 +1,381 @@
+/* =======================
+   ROOT / VARIÁVEIS
+======================= */
 :root {
   --mainColor: #10002b;
   --secundaryColor: #240046;
+
+  --purple-700: #3c096c;
+  --purple-500: #7b2cbf;
+  --purple-400: #9d4edd;
+
+  --glass: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.18);
+
   --black: #000;
-  --vidro: rgba(0, 0, 0, 0.308);
 }
+
+/* =======================
+   RESET
+======================= */
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  scroll-behavior: smooth;
-  text-decoration: none;
+
   border: none;
   outline: none;
+  text-decoration: none;
 }
+button,
+a,
+input[type="radio"] {
+  -webkit-tap-highlight-color: transparent;
+}
+.genres,
+.hero,
+.row {
+  margin: 1rem 0;
+}
+/* =======================
+   BASE (MOBILE FIRST)
+======================= */
 body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  margin: 1rem;
+  padding-top: 4.5rem;
+
+  color: #fff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.bg-blur {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+
   background: linear-gradient(
-    160deg,
-    var(--secundaryColor),
+    90deg,
     var(--mainColor),
+    var(--secundaryColor),
     var(--black)
   );
-  color: #fff;
-  height: 100dvh;
-  padding-top: 4rem;
+
+  filter: blur(40px);
+  transform: scale(1.3);
 }
+main {
+  flex: 1;
+}
+
+h1,
+h2 {
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+p {
+  opacity: 0.85;
+}
+
+/* =======================
+   GLASS
+======================= */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+}
+button {
+  background: transparent;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+/* =======================
+   HEADER
+======================= */
 header {
   position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
+  inset: 1rem auto auto 50%;
+  transform: translateX(-50%);
   z-index: 99;
-  background-color: #00000099;
-  border-bottom: var(--border);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
 }
+
 header section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
-  flex-wrap: wrap;
-}
-.genres {
-  padding: 5rem;
-}
-.row {
-  padding-top: 4rem;
-  position: relative;
-}
-
-.movies-row {
-  display: flex;
   gap: 1rem;
-
-  overflow-x: scroll;
-  overflow-y: hidden;
-  padding-bottom: 1rem;
+  padding: 0.8rem 1.2rem;
 }
-.movies-row::-webkit-scrollbar {
+header h1 {
+  font-size: 1.2rem;
+}
+/*HERO*/
+.hero {
+  padding: 1.5rem;
+}
+/* =======================
+   GÊNEROS (RADIO CUSTOM)
+======================= */
+.genres {
+  display: flex;
+  gap: 0.6rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.genres::-webkit-scrollbar {
   display: none;
 }
 
-.movies-row {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+input[type="radio"] {
+  display: none;
 }
-.card {
-  min-width: 400px;
-  max-width: 400px;
 
-  border-radius: 12px;
-  overflow: hidden;
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-.card img {
-  width: 400px;
-}
-.card:hover {
-  transform: scale(1.05);
-  z-index: 2;
-}
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+input[type="radio"] + label {
+  padding: 0.45rem 1rem;
+  font-size: 0.85rem;
+  white-space: nowrap;
 
-  width: 48px;
-  height: 48px;
-
-  border-radius: 50%;
-  border: none;
-
-  background: rgba(102, 7, 204, 0.6);
-  color: #fff;
-
-  font-size: 2rem;
+  border-radius: 999px;
   cursor: pointer;
 
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+
+  transition: background 0.3s ease;
+}
+
+input[type="radio"]:checked + label {
+  background: linear-gradient(135deg, var(--purple-500), var(--purple-400));
+}
+
+/* =======================
+   ROW / SCROLL
+======================= */
+.row {
+  position: relative;
+  overflow: hidden;
+}
+
+/* =======================
+   MOVIES ROW
+======================= */
+.movies-row {
   display: flex;
+  gap: 1.2rem;
+  padding: 3rem;
+
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.movies-row::-webkit-scrollbar {
+  display: none;
+}
+/* ==========================
+    SEARCH 
+=============== */
+.search-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+
+  display: none;
   align-items: center;
   justify-content: center;
 
-  z-index: 5;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+}
+.search-modal.active {
+  display: flex;
+}
+.search-box {
+  width: 90%;
+  max-width: 480px;
+
+  padding: 1.5rem;
+  position: relative;
+}
+.search-box input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+
+  border-radius: 12px;
+  font-size: 1rem;
+
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.search-box input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+.close-search {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+
+  background: transparent;
+  color: #fff;
+  font-size: 1.2rem;
+}
+.search-results {
+  margin-top: 1rem;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+}
+
+/* =======================
+   CARD (MOBILE)
+======================= */
+.card {
+  position: relative;
+
+  min-width: 140px;
+  height: 210px;
+
+  border-radius: 20px;
+  overflow: hidden;
+
+  backdrop-filter: blur(16px);
+  transition: all 0.3s ease;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-content {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: flex-end;
+
+  padding: 0.8rem;
+
+  background: linear-gradient(to top, rgba(16, 0, 43, 0.85), transparent 60%);
+}
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.35), transparent 60%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
-.row:hover .arrow {
+
+.card:hover::after {
   opacity: 1;
 }
 
-.arrow.left {
-  left: 0;
+/* =======================
+   SETAS (DESATIVADAS NO MOBILE)
+======================= */
+.arrow {
+  display: none;
 }
 
-.arrow.right {
-  right: 0;
-}
-
-.arrow:hover {
-  background: rgba(8, 95, 195, 0.85);
-}
+/* =======================
+   FOOTER
+======================= */
 footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
   display: flex;
   justify-content: center;
+
   padding: 2rem;
+}
+
+/* =======================
+   TABLET (≥ 640px)
+======================= */
+@media (min-width: 640px) {
+  .genres {
+    padding: 2rem;
+    gap: 1rem;
+  }
+
+  .card {
+    min-width: 180px;
+    height: 260px;
+  }
+}
+
+/* =======================
+   DESKTOP (≥ 1024px)
+======================= */
+@media (min-width: 1024px) {
+  .genres {
+    justify-content: flex-start;
+    padding-left: 3rem;
+  }
+
+  .row {
+    padding: 0 3rem;
+  }
+
+  .arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+    cursor: pointer;
+
+    background: rgba(123, 44, 191, 0.6);
+    backdrop-filter: blur(8px);
+    opacity: 0.4;
+
+    font-size: 2rem;
+    color: #fff;
+
+    z-index: 5;
+    transition:
+      background 0.3s ease,
+      opacity 0.3s ease;
+  }
+
+  .arrow.left {
+    left: 0.5rem;
+  }
+
+  .arrow.right {
+    right: 0.5rem;
+  }
+
+  .arrow:hover {
+    background: rgba(157, 78, 221, 0.9);
+    opacity: 0.9;
+  }
+
+  .card {
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: scale(1.04);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(157, 78, 221, 0.4);
+  }
 }

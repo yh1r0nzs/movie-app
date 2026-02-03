@@ -23,26 +23,49 @@ api();
 
 export const moviePopularity = async () => {
   try {
-    const resp = await fetch(
-      "https://api.themoviedb.org/3/movie/popular?language=pt-BR&page=1",
-      options,
-    );
-    const data = await resp.json();
-    return data.results;
-  } catch {
+    let allMovies = [];
+
+    for (let i = 1; i <= 4; i++) {
+      const resp = await fetch(
+        `https://api.themoviedb.org/3/movie/popular?language=pt-BR&page=${i}`,
+        options,
+      );
+      const data = await resp.json();
+      allMovies.push(...data.results);
+    }
+    return allMovies;
+  } catch (error) {
     console.error("Error", error);
   }
 };
 
 export const genres = async (genreId) => {
   try {
+    let allMovies = [];
+
+    for (let i = 1; i <= 4; i++) {
+      const resp = await fetch(
+        `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=${i}&sort_by=popularity.desc&with_genres=${genreId}`,
+        options,
+      );
+      const data = await resp.json();
+      allMovies.push(...data.results);
+    }
+
+    return allMovies;
+  } catch (error) {
+    console.error("Error", error);
+  }
+};
+export const searchMovies = async (query) => {
+  try {
     const resp = await fetch(
-      `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=${genreId}`,
+      `https://api.themoviedb.org/3/discover/movie?language=pt-BR&query=${query}`,
       options,
     );
     const data = await resp.json();
     return data.results;
-  } catch {
+  } catch (error) {
     console.error("Error", error);
   }
 };

@@ -20,27 +20,40 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
-    <header>
+    <div class="bg-blur"></div>
+    <header class="glass">
       <section>
         <h1>MovieBase</h1>
         <nav class="navbar" aria-label="Navegação principal">
-          <button aria-label="Filtrar filmes">
-            <img
-              src="https://img.icons8.com/?size=50&id=21637&format=png&color=ffffff"
-              alt=""
-            />
-          </button>
-          <button aria-label="Pesquisar filmes">
-            <img
-              src="https://img.icons8.com/?size=50&id=7695&format=png&color=ffffff"
-              alt=""
-            />
+          <button aria-label="Pesquisar" class="btn-search">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+              <circle
+                cx="11"
+                cy="11"
+                r="7"
+                fill="none"
+                stroke="white"
+                stroke-width="2"
+              />
+              <line
+                x1="16.5"
+                y1="16.5"
+                x2="22"
+                y2="22"
+                stroke="white"
+                stroke-width="2"
+              />
+            </svg>
           </button>
         </nav>
       </section>
     </header>
     <main>
-      <section class="genres" id="genres">
+      <section class="hero glass">
+        <h2>Descubra filmes populares</h2>
+        <p>Explore por gênero e deslize para descobrir novos títulos.</p>
+      </section>
+      <section class="genres glass" id="genres" role="radiogroup">
         <input
           type="radio"
           name="genres"
@@ -48,7 +61,7 @@
           id="acao"
           value="28"
         />
-        <label for="acao">Ação</label>
+        <label for="acao" class="glass">Ação</label>
 
         <input
           type="radio"
@@ -57,7 +70,7 @@
           id="aventura"
           value="12"
         />
-        <label for="aventura">Aventura</label>
+        <label for="aventura" class="glass">Aventura</label>
 
         <input
           type="radio"
@@ -66,7 +79,7 @@
           id="animacao"
           value="16"
         />
-        <label for="animacao">Animação</label>
+        <label for="animacao" class="glass">Animação</label>
 
         <input
           type="radio"
@@ -75,7 +88,7 @@
           id="comedia"
           value="35"
         />
-        <label for="comedia">Comédia</label>
+        <label for="comedia" class="glass">Comédia</label>
 
         <input
           type="radio"
@@ -84,9 +97,9 @@
           id="drama"
           value="18"
         />
-        <label for="drama">Drama</label>
+        <label for="drama" class="glass">Drama</label>
       </section>
-      <section class="row">
+      <section class="row glass">
         <button class="arrow left" aria-label="Scroll para esquerda">‹</button>
 
         <div class="movies-row" id="movies"></div>
@@ -102,6 +115,21 @@
         </a>
       </p>
     </footer>
+    <div class="search-modal" id="searchModal">
+      <div class="search-box glass">
+        <button class="close-search" aria-label="Fechar busca">✕</button>
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Buscar filmes..."
+          autocomplete="off"
+        />
+
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+
     <script type="module" src="./assets/js/main.js"></script>
   </body>
 </html>
