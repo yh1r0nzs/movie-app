@@ -3,6 +3,7 @@ import { getPopularMovies, getMoviesByGenre, searchMovies } from "./api/api.js";
 import { renderHero } from "./ui/hero.js";
 import { renderMovies } from "./ui/movies.js";
 import { splitFeaturedMovie } from "./states/moviesState.js";
+import { renderSearchResults } from "./ui/search.js";
 
 const heroContainer = document.querySelector("#hero");
 const moviesContainer = document.querySelector("#movies");
@@ -38,5 +39,8 @@ genreInputs.forEach((input) => {
     renderMovies(list, moviesContainer);
   });
 });
-
+input.addEventListener("input", async () =>
+  renderSearchResults(await searchMovies(input.value), results),
+);
+//renderSearchResults(search(input.value), results); CORRIGIR
 loadHome();
