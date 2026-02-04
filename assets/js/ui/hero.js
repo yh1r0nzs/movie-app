@@ -7,8 +7,6 @@ export const renderHero = (movie, container) => {
   document.querySelector("#bg").style.backgroundImage =
     `url(${IMAGE_BASE_URL + movie.backdrop_path})`;
   container.innerHTML = `<section class="hero glass">
-  <div class="hero-overlay"></div>
-
   <div class="hero-content">
     <span class="tag">EM DESTAQUE</span>
         <h2>${movie.title}</h2>
