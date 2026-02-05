@@ -12,6 +12,9 @@ export const renderMovies = (movies, container) => {
     <h2>${m.title ?? m.original_title}</h2>
     <p>${m.vote_average.toFixed(1)}</p>
     `;
+    card.addEventListener("click", () => {
+      window.location.href = `./pages/movie.html?id=${m.id}`;
+    });
     container.appendChild(card);
   });
 };
