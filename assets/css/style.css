@@ -126,6 +126,42 @@ p {
 input[type="radio"] + label {
   font-size: var(--fs-xs);
 }
+/* =======================
+STATES
+=========================*/
+
+#page-loader {
+  position: fixed;
+  inset: 0;
+  background: #0f0f1a84; /* combina bem com dark */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid rgba(255, 255, 255, 0.2);
+  border-top: 6px solid #6c63ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.page-error {
+  position: fixed;
+  inset: 70px 0 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* =======================
    GLASS
