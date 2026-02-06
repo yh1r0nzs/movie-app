@@ -1,10 +1,9 @@
 export function renderSearchResults(movies, container) {
-  container.innerHTML = ""; // limpa resultados anteriores
+  container.innerHTML = "";
 
   movies.slice(0, 6).forEach((movie) => {
     if (!movie.poster_path) return;
 
-    // Criar elemento card corretamente
     const card = document.createElement("div");
     card.classList.add("card-search");
 
@@ -13,7 +12,9 @@ export function renderSearchResults(movies, container) {
            alt="${movie.title ?? movie.original_title}" />
     `;
 
-    // Adiciona ao container
+    card.addEventListener("click", () => {
+      window.location.href = `./pages/movie.html?id=${movie.id}`;
+    });
     container.appendChild(card);
   });
 }

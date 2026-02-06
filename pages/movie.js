@@ -1,9 +1,9 @@
 import { getMovieDetails } from "../assets/js/api/api.js";
+import { showLoading, hideLoading } from "../assets/js/states/loading.js";
 const params = new URLSearchParams(window.location.search);
 const movieId = Number(params.get("id"));
-
+const loader = document.querySelector("#page-loader");
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
-const htmlTitle = document.querySelector("title");
 const poster = document.getElementById("movie-poster");
 const title = document.getElementById("movie-title");
 const overview = document.getElementById("movie-overview");
@@ -13,14 +13,45 @@ const year = document.getElementById("movie-year");
 const genresContainer = document.getElementById("movie-genres");
 const hero = document.querySelector(".movie-hero");
 
+function setMetaDescription(content) {
+  let meta = document.querySelector('meta[name="description"]');
+
+  if (!meta) {
+    meta = document.createElement("meta");
+    meta.name = "description";
+    document.head.appendChild(meta);
+  }
+
+  meta.content = content;
+}
+
+function setOG(tag, content) {
+  let meta = document.querySelector(`meta[property="${tag}"]`);
+  if (!meta) {
+    meta = document.createElement("meta");
+    meta.setAttribute("property", tag);
+    document.head.appendChild(meta);
+  }
+  meta.content = content;
+}
+
 async function loadMovie() {
   if (!movieId) return;
-
+  showLoading(loader);
   try {
     const movie = await getMovieDetails(movieId);
 
     hero.style.backgroundImage = `url(${IMAGE_BASE_URL}${movie.backdrop_path})`;
+    hero.setAttribute("aria-label", `Imagem de fundo do filme ${movie.title}`);
+
     poster.src = `${IMAGE_BASE_URL}${movie.poster_path}`;
+    poster.alt = `Poster do filme ${movie.title}`;
+
+    document.title = `${movie.title} | MovieBase`;
+    setMetaDescription(movie.overview || `Detalhes do filme ${movie.title}`);
+    setOG("og:title", movie.title);
+    setOG("og:description", movie.overview);
+    setOG("og:image", IMAGE_BASE_URL + movie.poster_path);
 
     title.textContent = movie.title;
     overview.textContent = movie.overview;
@@ -36,6 +67,8 @@ async function loadMovie() {
     });
   } catch (error) {
     console.error("Erro ao carregar filme", error);
+  } finally {
+    hideLoading(loader);
   }
 }
 const backBtn = document.querySelector(".btn-back");

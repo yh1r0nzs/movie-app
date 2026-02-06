@@ -24,7 +24,7 @@ export const getMoviesByGenre = (genreId) =>
 export const searchMovies = (query) => request(`/search/movie?query=${query}`);
 
 export const getMovieDetails = async (id) => {
-  const resp = await fetch(`${BASE_URL}/movie/${id}&language=pt-BR`, options);
+  const resp = await fetch(`${BASE_URL}/movie/${id}?language=pt-BR`, options);
   if (!resp.ok) {
     throw new Error("Erro ao buscar detalhes do filme");
   }
