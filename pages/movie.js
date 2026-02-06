@@ -1,9 +1,11 @@
 import { getMovieDetails } from "../assets/js/api/api.js";
 import { showLoading, hideLoading } from "../assets/js/states/loading.js";
+
 const params = new URLSearchParams(window.location.search);
 const movieId = Number(params.get("id"));
 const loader = document.querySelector("#page-loader");
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
+
 const poster = document.getElementById("movie-poster");
 const title = document.getElementById("movie-title");
 const overview = document.getElementById("movie-overview");
@@ -34,6 +36,40 @@ function setOG(tag, content) {
   }
   meta.content = content;
 }
+function setTwitterCard(name, content) {
+  let meta = document.querySelector(`meta[name="${name}"]`);
+  if (!meta) {
+    meta = document.createElement("meta");
+    meta.name = name;
+    document.head.appendChild(meta);
+  }
+  meta.content = content;
+}
+function setStructuredData(movie) {
+  let script = document.querySelector('script[type="application/ld+json"]');
+  if (!script) {
+    script = document.createElement("script");
+    script.type = "application/ld+json";
+    document.head.appendChild(script);
+  }
+
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "Movie",
+    name: movie.title,
+    image: IMAGE_BASE_URL + movie.poster_path,
+    description: movie.overview,
+    datePublished: movie.release_date,
+    genre: movie.genres.map((g) => g.name),
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: movie.vote_average.toFixed(1),
+      ratingCount: movie.vote_count,
+    },
+  };
+
+  script.textContent = JSON.stringify(data);
+}
 
 async function loadMovie() {
   if (!movieId) return;
@@ -52,6 +88,15 @@ async function loadMovie() {
     setOG("og:title", movie.title);
     setOG("og:description", movie.overview);
     setOG("og:image", IMAGE_BASE_URL + movie.poster_path);
+    setOG("og:type", "movie");
+    setOG("og:url", window.location.href);
+
+    setTwitterCard("twitter:card", "summary_large_image");
+    setTwitterCard("twitter:title", movie.title);
+    setTwitterCard("twitter:description", movie.overview);
+    setTwitterCard("twitter:image", IMAGE_BASE_URL + movie.poster_path);
+
+    setStructuredData(movie);
 
     title.textContent = movie.title;
     overview.textContent = movie.overview;
