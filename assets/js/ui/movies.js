@@ -9,8 +9,6 @@ export const renderMovies = (movies, container) => {
     card.classList.add("card");
 
     card.innerHTML = `<img src="${IMAGE_BASE_URL + m.poster_path}" alt="poster do filme ${m.title}">
-    <h2>${m.title ?? m.original_title}</h2>
-    <p>${m.vote_average.toFixed(1)}</p>
     `;
     card.addEventListener("click", () => {
       window.location.href = `./pages/movie.html?id=${m.id}`;

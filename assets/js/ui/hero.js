@@ -15,7 +15,7 @@ export const renderHero = (movie, container) => {
         <h2>${movie.title}</h2>
         <p>
           ${movie.overview}
-        </p>
+        </p>  
 
         <button class="btn-primary" data-id="${movie.id}">
          Ver detalhes

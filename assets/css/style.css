@@ -49,7 +49,9 @@
 }
 button,
 a,
-input[type="radio"] {
+input[type="radio"],
+.card,
+.card-search {
   -webkit-tap-highlight-color: transparent;
 }
 .genres,
@@ -213,7 +215,6 @@ STATES
 .hero,
 .movie-hero {
   position: relative;
-  padding-top: 4rem;
   min-height: 500px;
   background: transparent;
   border: none;
@@ -287,6 +288,7 @@ input[type="radio"]:checked + label {
   border-radius: 20px;
   overflow: hidden;
   backdrop-filter: blur(16px);
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 .card img,
@@ -469,7 +471,7 @@ footer {
   }
   .card {
     min-width: 180px;
-    height: 260px;
+    height: 300px;
   }
   .movie-content {
     flex-direction: row;
