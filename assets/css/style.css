@@ -377,7 +377,16 @@ input[type="radio"]:checked + label {
 footer {
   display: flex;
   justify-content: center;
-  padding: 2rem;
+  gap: 2rem;
+  padding-bottom: 3rem;
+}
+.footerimg {
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+.footerimg:hover {
+  background-color: var(--purple-500);
 }
 /* ==============
     MOVIE PAGE
