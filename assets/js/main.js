@@ -48,6 +48,12 @@ genreInputs.forEach((input) => {
   input.addEventListener("change", async () => {
     showLoading(loader);
     try {
+      if (input.value === "all") {
+        await loadHome();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+
       const movies = await getMoviesByGenre(input.value);
 
       if (movies.length === 0) {

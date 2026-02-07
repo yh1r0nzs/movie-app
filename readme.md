@@ -58,7 +58,7 @@ Evita múltiplas requisições desnecessárias durante a digitação na busca.
 
 O tamanho do backdrop é escolhido dinamicamente conforme a largura da tela:
 
-- Mobile: `w780`
+- Mobile: `w1280(Mantém a qualidade da imagem)`
 - Tablet: `w1280`
 - Desktop: `original`
 

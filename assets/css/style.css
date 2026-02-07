@@ -62,7 +62,9 @@ input[type="radio"],
 /* =======================
    BASE
 ======================= */
-html,
+html {
+  min-height: 100%;
+}
 body {
   overflow-x: hidden;
   min-height: 100vh;
@@ -86,6 +88,7 @@ main {
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
+  filter: saturate(120%) contrast(105%);
 }
 .bg-blur {
   position: fixed;
@@ -215,10 +218,17 @@ STATES
 .hero,
 .movie-hero {
   position: relative;
-  min-height: 500px;
   background: transparent;
   border: none;
   backdrop-filter: blur(0);
+}
+.hero {
+  min-height: 500px;
+  display: flex;
+  align-items: end;
+}
+.movie-hero {
+  min-height: 100vh;
 }
 .hero-content,
 .movie-content {
@@ -231,10 +241,10 @@ STATES
   gap: 0.8rem;
 }
 .hero .tag {
-  font-size: 0.8rem;
-  font-weight: var(--fw-semibold);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-bold);
   letter-spacing: 1.5px;
-  color: var(--purple-400);
+  color: var(--purple-500);
 }
 .hero h2 {
   text-transform: uppercase;
@@ -296,6 +306,10 @@ input[type="radio"]:checked + label {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.card:focus-visible {
+  outline: 2px solid var(--purple-400);
+  outline-offset: 4px;
 }
 .card-search:hover {
   background: rgba(255, 255, 255, 0.1);
@@ -450,15 +464,6 @@ footer {
 /* ==================
    MEDIA QUERIES
 ====================== */
-@media (max-width: 480px) {
-  .hero {
-    display: flex;
-    align-items: flex-end;
-  }
-  .hero-content p {
-    display: none;
-  }
-}
 @media (min-width: 480px) {
   .movies-row {
     grid-template-columns: repeat(2, 1fr);

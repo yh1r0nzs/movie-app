@@ -1,7 +1,6 @@
 function getBackdropBaseURL() {
   if (window.innerWidth >= 1024) return "original";
-  if (window.innerWidth >= 640) return "w1280";
-  return "w780";
+  return "w1280";
 }
 const size = getBackdropBaseURL();
 const IMAGE_BASE_URL = `https://image.tmdb.org/t/p/${size}`;
